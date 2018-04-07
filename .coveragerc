@@ -1,0 +1,7 @@
+[report]
+show_missing = True
+include = ./*
+omit = ./test-repo/*
+       ./templates/*
+       ./files/*
+       .tox/*

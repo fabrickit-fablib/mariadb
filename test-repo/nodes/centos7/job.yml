@@ -1,0 +1,56 @@
+job:
+  pipelines:
+    - name: bootstrap
+      runs:
+        - delete container1
+        - create container1
+        - if status == 0:
+          - sh echo success bootstrap
+        - else:
+          - sh echo failed bootstrap
+    - name: setup
+      runs:
+        - setup
+    - name: clean
+      runs:
+        - delete container1
+
+container1:
+  provider: libvirt
+  libvirt:
+    gateway: 172.16.100.1
+    netmask: 255.255.255.0
+  libvirt_vms:
+    - name: mariadb-centos7-1
+      ports:
+        - {ip: 172.16.100.121, queues: 1, type: virtio}
+      nameservers:
+        - 172.16.100.1
+      template: user-data_centos7
+      src_image: http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1511.qcow2c.xz
+      vcpus: 1
+      ram: 2048
+      disk_size: 40
+      disk_cache: directsync
+    - name: mariadb-centos7-2
+      ports:
+        - {ip: 172.16.100.122, queues: 1, type: virtio}
+      nameservers:
+        - 172.16.100.1
+      template: user-data_centos7
+      src_image: http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1511.qcow2c.xz
+      vcpus: 1
+      ram: 2048
+      disk_size: 40
+      disk_cache: directsync
+    - name: mariadb-centos7-3
+      ports:
+        - {ip: 172.16.100.123, queues: 1, type: virtio}
+      nameservers:
+        - 172.16.100.1
+      template: user-data_centos7
+      src_image: http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1511.qcow2c.xz
+      vcpus: 1
+      ram: 2048
+      disk_size: 40
+      disk_cache: directsync

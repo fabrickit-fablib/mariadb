@@ -1,0 +1,23 @@
+node_map:
+  mariadb:
+    hosts:
+      - mariadb-centos7-[1-3].example.com
+    fabruns:
+      - mariadb/base
+
+
+mariadb:
+  cluster_map:
+    common:
+      hosts: ${#node_map.mariadb.hosts}
+      dbs: [common]
+      port: 3306
+      root_password: rootpass
+      user_map:
+        common:
+          user: common
+          password: commonpass
+          src_hosts:
+            - '172.16.100.0/255.255.255.0'
+          previleges: 'ALL PREVILEGES'
+          dbs: [common]
