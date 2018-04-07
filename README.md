@@ -7,7 +7,7 @@ This is mariadb of fablib.
 
 ## Running test-repo
 ```
-$ fab test:l=mariadb,c=ubuntu16,p='bootstrap|setup'
+$ fab test:l=mariadb,c=centos7,p='bootstrap|setup'
 ```
 
 
